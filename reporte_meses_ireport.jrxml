@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report4" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f25ab5a1-0ed1-45cd-a8e6-4a7969690e4b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString>
+		<![CDATA[select m.motel_nombre, m.motel_direccion, m.motel_telefono, h.habitacion_descripcion, to_char(to_date(factura_fecha_llegada), 'month') as mes, count(to_char(to_date(factura_fecha_llegada), 'month')) * f.factura_total as mes_total
+from factura f
+inner join habitacion h on h.habitacion_id = f.habitacion_id
+inner join motel m on m.motel_id = h.motel_id
+group by f.factura_total, m.motel_nombre, m.motel_direccion, m.motel_telefono, h.habitacion_descripcion,
+to_char(to_date(factura_fecha_llegada), 'month'), to_date(factura_fecha_llegada), factura_fecha_llegada, 'month', to_date(factura_fecha_llegada),
+factura_fecha_llegada, factura_fecha_llegada, 'month', to_date(factura_fecha_llegada), factura_fecha_llegada,
+factura_fecha_llegada, factura_fecha_llegada, 'month', to_date(factura_fecha_llegada), factura_fecha_llegada,
+factura_fecha_llegada, factura_fecha_llegada, factura_fecha_llegada, 'month'
+order by mes desc]]>
+	</queryString>
+	<field name="MOTEL_NOMBRE" class="java.lang.String"/>
+	<field name="MOTEL_DIRECCION" class="java.lang.String"/>
+	<field name="MOTEL_TELEFONO" class="java.lang.String"/>
+	<field name="HABITACION_DESCRIPCION" class="java.lang.String"/>
+	<field name="MES" class="java.lang.String"/>
+	<field name="MES_TOTAL" class="java.math.BigDecimal"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+		<groupHeader>
+			<band height="40">
+				<textField>
+					<reportElement style="SubTitle" x="47" y="13" width="506" height="24" forecolor="#CC0000" uuid="f1124cd0-6cd6-47f9-af16-d47d3aeac32c"/>
+					<textElement>
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["MESES"]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement mode="Opaque" x="0" y="13" width="36" height="24" forecolor="#CCCCCC" backcolor="#CCCCCC" uuid="15dfd1d0-724d-465b-9d54-8d9f817cfdce"/>
+				</rectangle>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
+		<groupHeader>
+			<band height="29">
+				<textField>
+					<reportElement style="SubTitle" x="0" y="4" width="58" height="20" uuid="ff6c5d1e-8dc6-430f-a09a-aa835062908b"/>
+					<textElement>
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Mes de "]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="58" y="4" width="100" height="20" forecolor="#666666" uuid="688ead0e-d869-4f61-8602-e7249b1ce2e8"/>
+					<textElement>
+						<font fontName="Arial" size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{MES}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="129" y="4" width="417" height="20" forecolor="#666666" uuid="f94f2e3d-367e-4e19-9d8d-67dec0006764"/>
+					<textElement>
+						<font fontName="Arial" size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{HABITACION_DESCRIPCION}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<image>
+				<reportElement x="275" y="0" width="300" height="64" uuid="24495ebc-ec99-4da3-ade4-41e468456d40"/>
+				<imageExpression><![CDATA["leaf_banner_red.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="263" height="33" uuid="e7af03aa-5d01-4ac1-9f10-092afd5c31f6"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[REPORTE MOTEL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="SubTitle" x="-13" y="46" width="287" height="22" uuid="d593d955-8623-4440-b165-265c26b040ef"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[GANANCIAS POR MES AÑO 2022]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="100" height="15" uuid="dd1ff2ca-0931-48a6-8169-89a544ef6943"/>
+				<text><![CDATA[MOTEL:]]></text>
+			</staticText>
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="1bddb4ee-8a78-4d97-a212-0cb17473ff48"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="142" y="16" width="100" height="20" uuid="4b70e067-2b8f-400d-9ceb-484a57105f65"/>
+				<textFieldExpression><![CDATA[$F{MOTEL_NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="263" y="16" width="131" height="20" uuid="71c02353-01d9-4c89-acdf-9ab282ebfb62"/>
+				<textFieldExpression><![CDATA[$F{MOTEL_DIRECCION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="446" y="16" width="100" height="20" uuid="01e0ddc0-195e-4cae-8a2f-541adba92a07"/>
+				<textFieldExpression><![CDATA[$F{MOTEL_TELEFONO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="286" y="2" width="100" height="20" uuid="841f25b1-b597-4f25-9e7c-dff45fa4c297"/>
+				<text><![CDATA[MES_TOTAL]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="4b3c19c0-7d51-42f5-b30f-0a5293646e10"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="322" height="15" uuid="6455715a-254e-4eab-8732-2400ea17a2f7"/>
+				<textFieldExpression><![CDATA["Por habitacion y servicio de comida en dolares: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="263" y="0" width="87" height="20" uuid="e1a6227e-2ed3-4b21-a0b8-fa2af6265983"/>
+				<textFieldExpression><![CDATA[$F{MES_TOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1" uuid="d212edd6-03a0-4d48-8743-6c79367082f4"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement style="Column header" x="433" y="0" width="80" height="20" uuid="e8365661-072d-41d9-8455-e3e5988fd507"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="513" y="0" width="40" height="20" uuid="1e796296-08b6-4404-a939-9c7717422d66"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="91e84709-a69f-4491-9aa5-81d2c81d8da6"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
